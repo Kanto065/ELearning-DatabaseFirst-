@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ELearning.Models.CourseModel>
+
+@{
+    ViewBag.Title = "GetAll";
+}
+
+
+<h2>All Course</h2>
+
+<p>
+    @Html.ActionLink("Create New", "AddCourse", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Thumbnail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Learning)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.Name)
+        </th>
+        <th>Action Links</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Thumbnail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Learning)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-outline-secondary btn-sm" })
+                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-info btn-sm" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-outline-danger btn-sm" })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="68e6d9a92a8f4459a447d940a7f6f783" Name="Diagram1">
+        <EntityTypeShape EntityType="ELearningModel.Address" Width="1.5" PointX="0.875" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELearningModel.Category" Width="1.5" PointX="0.875" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELearningModel.Course" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELearningModel.CourseInstructorTable" Width="1.5" PointX="5" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELearningModel.Instructor" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="ELearningModel.FK_Instructor_Address" ManuallyRouted="false" />
+        <AssociationConnector Association="ELearningModel.FK_Course_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="ELearningModel.FK_CourseInstructorTable_Course" ManuallyRouted="false" ></AssociationConnector>
+        <AssociationConnector Association="ELearningModel.FK_CourseInstructorTable_Instructor" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
