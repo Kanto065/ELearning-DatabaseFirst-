@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ELearning.Models;
 using ELearning.Repository;
+using System.Web.Security;
 
 namespace ELearning.Controllers
 {
@@ -52,11 +53,18 @@ namespace ELearning.Controllers
             var check = repo.VarifyInstructor(ins);
             if(check)
             {
+                FormsAuthentication.SetAuthCookie(ins.Email, false);
                 return RedirectToAction("GetAll", "Course");
             }
             ViewBag.msg = "log in credentials not valid";
             
             return View();
+        }
+
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("LogIn");
         }
 
     }

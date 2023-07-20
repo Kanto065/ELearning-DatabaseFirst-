@@ -17,10 +17,18 @@
             </button>
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Register", "AddInstructor", "Instructor", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Log In", "LogIn", "Instructor", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Courses", "GetAll", "Course", new { area = "" }, new { @class = "nav-link" })</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Courses", "GetAll", "Course", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Log Out", "LogOut", "Instructor", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Register", "AddInstructor", "Instructor", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Log In", "LogIn", "Instructor", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
                 </ul>
+
             </div>
         </div>
     </nav>

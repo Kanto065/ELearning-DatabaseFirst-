@@ -9,6 +9,7 @@ using ELearning.Repository;
 
 namespace ELearning.Controllers
 {
+    [Authorize]
     public class CourseController : Controller
     {
         CourseRepo repo;
