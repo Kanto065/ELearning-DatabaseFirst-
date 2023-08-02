@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2cbce3330ca64227afc8aa0979aa4204" Name="Diagram1">
+        <EntityTypeShape EntityType="ELearningModel.Category" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELearningModel.Course" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELearningModel.CourseInstructorTable" Width="1.5" PointX="5.25" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELearningModel.CourseModuleTable" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELearningModel.CourseStudentTable" Width="1.5" PointX="5.25" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELearningModel.CourseTestimonialTable" Width="1.5" PointX="8.25" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELearningModel.Instructor" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELearningModel.Module" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELearningModel.Student" Width="1.5" PointX="3" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELearningModel.StudentTestimonialTable" Width="1.5" PointX="8.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ELearningModel.Testimonial" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="ELearningModel.FK_Course_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="ELearningModel.FK_CourseInstructorTable_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="ELearningModel.FK_CourseModuleTable_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="ELearningModel.FK_CourseStudentTable_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="ELearningModel.FK_CourseTestimonialTable_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="ELearningModel.FK_CourseInstructorTable_Instructor" ManuallyRouted="false" />
+        <AssociationConnector Association="ELearningModel.FK_CourseModuleTable_Module" ManuallyRouted="false" />
+        <AssociationConnector Association="ELearningModel.FK_CourseStudentTable_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="ELearningModel.FK_CourseTestimonialTable_Testimonial" ManuallyRouted="false" />
+        <AssociationConnector Association="ELearningModel.FK_StudentTestimonialTable_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="ELearningModel.FK_StudentTestimonialTable_Testimonial" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

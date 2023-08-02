@@ -1,0 +1,764 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ELearningModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="img" Type="image" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="Thumbnail" Type="varchar" MaxLength="50" />
+          <Property Name="Learning" Type="varchar" MaxLength="255" />
+          <Property Name="CategoryId" Type="int" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="UpdatedAt" Type="datetime" />
+          <Property Name="Price" Type="float" />
+        </EntityType>
+        <EntityType Name="CourseInstructorTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourseId" Type="int" />
+          <Property Name="InstructorId" Type="int" />
+        </EntityType>
+        <EntityType Name="CourseModuleTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourseId" Type="int" />
+          <Property Name="ModuleId" Type="int" />
+        </EntityType>
+        <EntityType Name="CourseStudentTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CourseTestimonialTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourseId" Type="int" />
+          <Property Name="TestimonialId" Type="int" />
+        </EntityType>
+        <EntityType Name="Instructor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="DOB" Type="nchar" MaxLength="10" />
+          <Property Name="Institute" Type="varchar" MaxLength="50" />
+          <Property Name="Domain" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Link" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="DOB" Type="date" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="StudentTestimonialTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentId" Type="int" />
+          <Property Name="TestimonialId" Type="int" />
+        </EntityType>
+        <EntityType Name="Testimonial">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Course_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Course" Type="Self.Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Course">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseInstructorTable_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+          <End Role="CourseInstructorTable" Type="Self.CourseInstructorTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseInstructorTable">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseInstructorTable_Instructor">
+          <End Role="Instructor" Type="Self.Instructor" Multiplicity="0..1" />
+          <End Role="CourseInstructorTable" Type="Self.CourseInstructorTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instructor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseInstructorTable">
+              <PropertyRef Name="InstructorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseModuleTable_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+          <End Role="CourseModuleTable" Type="Self.CourseModuleTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseModuleTable">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseModuleTable_Module">
+          <End Role="Module" Type="Self.Module" Multiplicity="0..1" />
+          <End Role="CourseModuleTable" Type="Self.CourseModuleTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseModuleTable">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseStudentTable_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="CourseStudentTable" Type="Self.CourseStudentTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseStudentTable">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseStudentTable_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="CourseStudentTable" Type="Self.CourseStudentTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseStudentTable">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseTestimonialTable_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+          <End Role="CourseTestimonialTable" Type="Self.CourseTestimonialTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseTestimonialTable">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseTestimonialTable_Testimonial">
+          <End Role="Testimonial" Type="Self.Testimonial" Multiplicity="0..1" />
+          <End Role="CourseTestimonialTable" Type="Self.CourseTestimonialTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Testimonial">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseTestimonialTable">
+              <PropertyRef Name="TestimonialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentTestimonialTable_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="StudentTestimonialTable" Type="Self.StudentTestimonialTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentTestimonialTable">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentTestimonialTable_Testimonial">
+          <End Role="Testimonial" Type="Self.Testimonial" Multiplicity="0..1" />
+          <End Role="StudentTestimonialTable" Type="Self.StudentTestimonialTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Testimonial">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentTestimonialTable">
+              <PropertyRef Name="TestimonialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ELearningModelStoreContainer">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseInstructorTable" EntityType="Self.CourseInstructorTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseModuleTable" EntityType="Self.CourseModuleTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseStudentTable" EntityType="Self.CourseStudentTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseTestimonialTable" EntityType="Self.CourseTestimonialTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Instructor" EntityType="Self.Instructor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Module" EntityType="Self.Module" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentTestimonialTable" EntityType="Self.StudentTestimonialTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Testimonial" EntityType="Self.Testimonial" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Course_Category" Association="Self.FK_Course_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Course" EntitySet="Course" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseInstructorTable_Course" Association="Self.FK_CourseInstructorTable_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="CourseInstructorTable" EntitySet="CourseInstructorTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseInstructorTable_Instructor" Association="Self.FK_CourseInstructorTable_Instructor">
+            <End Role="Instructor" EntitySet="Instructor" />
+            <End Role="CourseInstructorTable" EntitySet="CourseInstructorTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseModuleTable_Course" Association="Self.FK_CourseModuleTable_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="CourseModuleTable" EntitySet="CourseModuleTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseModuleTable_Module" Association="Self.FK_CourseModuleTable_Module">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="CourseModuleTable" EntitySet="CourseModuleTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseStudentTable_Course" Association="Self.FK_CourseStudentTable_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="CourseStudentTable" EntitySet="CourseStudentTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseStudentTable_Student" Association="Self.FK_CourseStudentTable_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="CourseStudentTable" EntitySet="CourseStudentTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseTestimonialTable_Course" Association="Self.FK_CourseTestimonialTable_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="CourseTestimonialTable" EntitySet="CourseTestimonialTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseTestimonialTable_Testimonial" Association="Self.FK_CourseTestimonialTable_Testimonial">
+            <End Role="Testimonial" EntitySet="Testimonial" />
+            <End Role="CourseTestimonialTable" EntitySet="CourseTestimonialTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentTestimonialTable_Student" Association="Self.FK_StudentTestimonialTable_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentTestimonialTable" EntitySet="StudentTestimonialTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentTestimonialTable_Testimonial" Association="Self.FK_StudentTestimonialTable_Testimonial">
+            <End Role="Testimonial" EntitySet="Testimonial" />
+            <End Role="StudentTestimonialTable" EntitySet="StudentTestimonialTable" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ELearningModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="img" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Course" Relationship="Self.FK_Course_Category" FromRole="Category" ToRole="Course" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Thumbnail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Learning" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryId" Type="Int32" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Course_Category" FromRole="Course" ToRole="Category" />
+          <NavigationProperty Name="CourseInstructorTable" Relationship="Self.FK_CourseInstructorTable_Course" FromRole="Course" ToRole="CourseInstructorTable" />
+          <NavigationProperty Name="CourseModuleTable" Relationship="Self.FK_CourseModuleTable_Course" FromRole="Course" ToRole="CourseModuleTable" />
+          <NavigationProperty Name="CourseStudentTable" Relationship="Self.FK_CourseStudentTable_Course" FromRole="Course" ToRole="CourseStudentTable" />
+          <NavigationProperty Name="CourseTestimonialTable" Relationship="Self.FK_CourseTestimonialTable_Course" FromRole="Course" ToRole="CourseTestimonialTable" />
+          <Property Name="Price" Type="Double" />
+        </EntityType>
+        <EntityType Name="CourseInstructorTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseId" Type="Int32" />
+          <Property Name="InstructorId" Type="Int32" />
+          <NavigationProperty Name="Course" Relationship="Self.FK_CourseInstructorTable_Course" FromRole="CourseInstructorTable" ToRole="Course" />
+          <NavigationProperty Name="Instructor" Relationship="Self.FK_CourseInstructorTable_Instructor" FromRole="CourseInstructorTable" ToRole="Instructor" />
+        </EntityType>
+        <EntityType Name="CourseModuleTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseId" Type="Int32" />
+          <Property Name="ModuleId" Type="Int32" />
+          <NavigationProperty Name="Course" Relationship="Self.FK_CourseModuleTable_Course" FromRole="CourseModuleTable" ToRole="Course" />
+          <NavigationProperty Name="Module" Relationship="Self.FK_CourseModuleTable_Module" FromRole="CourseModuleTable" ToRole="Module" />
+        </EntityType>
+        <EntityType Name="CourseStudentTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Course" Relationship="Self.FK_CourseStudentTable_Course" FromRole="CourseStudentTable" ToRole="Course" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_CourseStudentTable_Student" FromRole="CourseStudentTable" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="CourseTestimonialTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseId" Type="Int32" />
+          <Property Name="TestimonialId" Type="Int32" />
+          <NavigationProperty Name="Course" Relationship="Self.FK_CourseTestimonialTable_Course" FromRole="CourseTestimonialTable" ToRole="Course" />
+          <NavigationProperty Name="Testimonial" Relationship="Self.FK_CourseTestimonialTable_Testimonial" FromRole="CourseTestimonialTable" ToRole="Testimonial" />
+        </EntityType>
+        <EntityType Name="Instructor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DOB" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Institute" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Domain" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CourseInstructorTable" Relationship="Self.FK_CourseInstructorTable_Instructor" FromRole="Instructor" ToRole="CourseInstructorTable" />
+        </EntityType>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Link" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CourseModuleTable" Relationship="Self.FK_CourseModuleTable_Module" FromRole="Module" ToRole="CourseModuleTable" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CourseStudentTable" Relationship="Self.FK_CourseStudentTable_Student" FromRole="Student" ToRole="CourseStudentTable" />
+          <NavigationProperty Name="StudentTestimonialTable" Relationship="Self.FK_StudentTestimonialTable_Student" FromRole="Student" ToRole="StudentTestimonialTable" />
+        </EntityType>
+        <EntityType Name="StudentTestimonialTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentId" Type="Int32" />
+          <Property Name="TestimonialId" Type="Int32" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_StudentTestimonialTable_Student" FromRole="StudentTestimonialTable" ToRole="Student" />
+          <NavigationProperty Name="Testimonial" Relationship="Self.FK_StudentTestimonialTable_Testimonial" FromRole="StudentTestimonialTable" ToRole="Testimonial" />
+        </EntityType>
+        <EntityType Name="Testimonial">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CourseTestimonialTable" Relationship="Self.FK_CourseTestimonialTable_Testimonial" FromRole="Testimonial" ToRole="CourseTestimonialTable" />
+          <NavigationProperty Name="StudentTestimonialTable" Relationship="Self.FK_StudentTestimonialTable_Testimonial" FromRole="Testimonial" ToRole="StudentTestimonialTable" />
+        </EntityType>
+        <Association Name="FK_Course_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Course" Type="Self.Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Course">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseInstructorTable_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+          <End Role="CourseInstructorTable" Type="Self.CourseInstructorTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseInstructorTable">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseModuleTable_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+          <End Role="CourseModuleTable" Type="Self.CourseModuleTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseModuleTable">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseStudentTable_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="CourseStudentTable" Type="Self.CourseStudentTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseStudentTable">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseTestimonialTable_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+          <End Role="CourseTestimonialTable" Type="Self.CourseTestimonialTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseTestimonialTable">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseInstructorTable_Instructor">
+          <End Role="Instructor" Type="Self.Instructor" Multiplicity="0..1" />
+          <End Role="CourseInstructorTable" Type="Self.CourseInstructorTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instructor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseInstructorTable">
+              <PropertyRef Name="InstructorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseModuleTable_Module">
+          <End Role="Module" Type="Self.Module" Multiplicity="0..1" />
+          <End Role="CourseModuleTable" Type="Self.CourseModuleTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseModuleTable">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseStudentTable_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="CourseStudentTable" Type="Self.CourseStudentTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseStudentTable">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseTestimonialTable_Testimonial">
+          <End Role="Testimonial" Type="Self.Testimonial" Multiplicity="0..1" />
+          <End Role="CourseTestimonialTable" Type="Self.CourseTestimonialTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Testimonial">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseTestimonialTable">
+              <PropertyRef Name="TestimonialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentTestimonialTable_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="StudentTestimonialTable" Type="Self.StudentTestimonialTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentTestimonialTable">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentTestimonialTable_Testimonial">
+          <End Role="Testimonial" Type="Self.Testimonial" Multiplicity="0..1" />
+          <End Role="StudentTestimonialTable" Type="Self.StudentTestimonialTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Testimonial">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentTestimonialTable">
+              <PropertyRef Name="TestimonialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ELearningEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Category" EntityType="Self.Category" />
+          <EntitySet Name="Course" EntityType="Self.Course" />
+          <EntitySet Name="CourseInstructorTable" EntityType="Self.CourseInstructorTable" />
+          <EntitySet Name="CourseModuleTable" EntityType="Self.CourseModuleTable" />
+          <EntitySet Name="CourseStudentTable" EntityType="Self.CourseStudentTable" />
+          <EntitySet Name="CourseTestimonialTable" EntityType="Self.CourseTestimonialTable" />
+          <EntitySet Name="Instructor" EntityType="Self.Instructor" />
+          <EntitySet Name="Module" EntityType="Self.Module" />
+          <EntitySet Name="Student" EntityType="Self.Student" />
+          <EntitySet Name="StudentTestimonialTable" EntityType="Self.StudentTestimonialTable" />
+          <EntitySet Name="Testimonial" EntityType="Self.Testimonial" />
+          <AssociationSet Name="FK_Course_Category" Association="Self.FK_Course_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Course" EntitySet="Course" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseInstructorTable_Course" Association="Self.FK_CourseInstructorTable_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="CourseInstructorTable" EntitySet="CourseInstructorTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseModuleTable_Course" Association="Self.FK_CourseModuleTable_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="CourseModuleTable" EntitySet="CourseModuleTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseStudentTable_Course" Association="Self.FK_CourseStudentTable_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="CourseStudentTable" EntitySet="CourseStudentTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseTestimonialTable_Course" Association="Self.FK_CourseTestimonialTable_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="CourseTestimonialTable" EntitySet="CourseTestimonialTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseInstructorTable_Instructor" Association="Self.FK_CourseInstructorTable_Instructor">
+            <End Role="Instructor" EntitySet="Instructor" />
+            <End Role="CourseInstructorTable" EntitySet="CourseInstructorTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseModuleTable_Module" Association="Self.FK_CourseModuleTable_Module">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="CourseModuleTable" EntitySet="CourseModuleTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseStudentTable_Student" Association="Self.FK_CourseStudentTable_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="CourseStudentTable" EntitySet="CourseStudentTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseTestimonialTable_Testimonial" Association="Self.FK_CourseTestimonialTable_Testimonial">
+            <End Role="Testimonial" EntitySet="Testimonial" />
+            <End Role="CourseTestimonialTable" EntitySet="CourseTestimonialTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentTestimonialTable_Student" Association="Self.FK_StudentTestimonialTable_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentTestimonialTable" EntitySet="StudentTestimonialTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentTestimonialTable_Testimonial" Association="Self.FK_StudentTestimonialTable_Testimonial">
+            <End Role="Testimonial" EntitySet="Testimonial" />
+            <End Role="StudentTestimonialTable" EntitySet="StudentTestimonialTable" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ELearningModelStoreContainer" CdmEntityContainer="ELearningEntities">
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="ELearningModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="img" ColumnName="img" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Course">
+            <EntityTypeMapping TypeName="ELearningModel.Course">
+              <MappingFragment StoreEntitySet="Course">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+                <ScalarProperty Name="Learning" ColumnName="Learning" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseInstructorTable">
+            <EntityTypeMapping TypeName="ELearningModel.CourseInstructorTable">
+              <MappingFragment StoreEntitySet="CourseInstructorTable">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="InstructorId" ColumnName="InstructorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseModuleTable">
+            <EntityTypeMapping TypeName="ELearningModel.CourseModuleTable">
+              <MappingFragment StoreEntitySet="CourseModuleTable">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseStudentTable">
+            <EntityTypeMapping TypeName="ELearningModel.CourseStudentTable">
+              <MappingFragment StoreEntitySet="CourseStudentTable">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseTestimonialTable">
+            <EntityTypeMapping TypeName="ELearningModel.CourseTestimonialTable">
+              <MappingFragment StoreEntitySet="CourseTestimonialTable">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="TestimonialId" ColumnName="TestimonialId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Instructor">
+            <EntityTypeMapping TypeName="ELearningModel.Instructor">
+              <MappingFragment StoreEntitySet="Instructor">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Institute" ColumnName="Institute" />
+                <ScalarProperty Name="Domain" ColumnName="Domain" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Module">
+            <EntityTypeMapping TypeName="ELearningModel.Module">
+              <MappingFragment StoreEntitySet="Module">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student">
+            <EntityTypeMapping TypeName="ELearningModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentTestimonialTable">
+            <EntityTypeMapping TypeName="ELearningModel.StudentTestimonialTable">
+              <MappingFragment StoreEntitySet="StudentTestimonialTable">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="TestimonialId" ColumnName="TestimonialId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Testimonial">
+            <EntityTypeMapping TypeName="ELearningModel.Testimonial">
+              <MappingFragment StoreEntitySet="Testimonial">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
