@@ -137,6 +137,7 @@
     </Compile>
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\InstructorController.cs" />
+    <Compile Include="Controllers\ThroughAPI\InstructorController.cs" />
     <Compile Include="Course.cs">
       <DependentUpon>ELearningModel.tt</DependentUpon>
     </Compile>
