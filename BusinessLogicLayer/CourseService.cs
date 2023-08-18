@@ -5,7 +5,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using BusinessLogicLayer.BusinessEntity;
+using BusinessEntityLayer;
 using DataAccessLayer;
 
 namespace BusinessLogicLayer
@@ -20,7 +20,8 @@ namespace BusinessLogicLayer
                 c.CreateMap<Category, CategoryModel>();
             });
             var mapper = new Mapper(config);
-            var data = mapper.Map<List<CourseModel>>(CourseRepo.Get());
+            var da = DataAccessFactory.CourseDataAccess();
+            var data = mapper.Map<List<CourseModel>>(da.Get());
             return data;
         }
 
@@ -32,7 +33,7 @@ namespace BusinessLogicLayer
             });
             var mapper = new Mapper(config);
             var data = mapper.Map<Course>(course);
-            CourseRepo.Add(data);
+            DataAccessFactory.CourseDataAccess().Add(data);
         }
 
     }

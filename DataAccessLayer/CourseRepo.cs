@@ -6,41 +6,42 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
-    public class CourseRepo
+    public class CourseRepo : IRepository<Course, int>
     {
-        static ELearningEntities db;
-        static CourseRepo()
+        ELearningEntities db;
+        public CourseRepo(ELearningEntities db)
         {
-            db = new ELearningEntities();
+            this.db = db;
+        }
+        public void Add(Course e)
+        {
+            db.Course.Add(e);
+            db.SaveChanges();
         }
 
-        public static List<Course> Get()
-        {   
+        public void Delete(int id)
+        {
+            var s = db.Course.FirstOrDefault(e => e.Id == id);
+            db.Course.Remove(s);
+            db.SaveChanges();
+        }
+
+        public void Edit(Course e)
+        {
+            var s = db.Course.FirstOrDefault(c => c.Id == e.Id);
+            db.Entry(s).CurrentValues.SetValues(e);
+            db.SaveChanges();
+            
+        }
+
+        public List<Course> Get()
+        {
             return db.Course.ToList();
         }
 
-        public static Course Get(int id)
+        public Course Get(int id)
         {
-            return db.Course.FirstOrDefault(x => x.Id == id);
+            return db.Course.FirstOrDefault(c => c.Id == id);
         }
-
-        public static void Edit(Course c)
-        {
-            var ds = db.Course.FirstOrDefault(x => x.Id == c.Id);
-            db.Entry(ds).CurrentValues.SetValues(c);
-            db.SaveChanges();
-        }
-        public static void Delete(int id)
-        {
-            var ds = db.Course.FirstOrDefault(x=> x.Id == id);
-            db.Course.Remove(ds);
-        }
-
-        public static void Add(Course c)
-        {
-            db.Course.Add(c);
-            db.SaveChanges();
-        }
-
     }
 }

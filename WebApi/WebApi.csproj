@@ -118,6 +118,10 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BusinessEntityLayer\BusinessEntityLayer.csproj">
+      <Project>{3008d0bd-bce5-44fb-8623-8e80170e55c3}</Project>
+      <Name>BusinessEntityLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BusinessLogicLayer\BusinessLogicLayer.csproj">
       <Project>{ad0a5eb1-1e7e-43b5-86a5-85f84863c196}</Project>
       <Name>BusinessLogicLayer</Name>

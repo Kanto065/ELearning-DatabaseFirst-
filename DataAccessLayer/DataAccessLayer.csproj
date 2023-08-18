@@ -69,6 +69,7 @@
     <Compile Include="Category.cs">
       <DependentUpon>EFModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CategoryRepo.cs" />
     <Compile Include="Course.cs">
       <DependentUpon>EFModel.tt</DependentUpon>
     </Compile>
@@ -88,6 +89,7 @@
     <Compile Include="C__MigrationHistory.cs">
       <DependentUpon>EFModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataAccessFactory.cs" />
     <Compile Include="EFModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -106,6 +108,7 @@
     <Compile Include="Instructor.cs">
       <DependentUpon>EFModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="IRepository.cs" />
     <Compile Include="Module.cs">
       <DependentUpon>EFModel.tt</DependentUpon>
     </Compile>
