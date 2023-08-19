@@ -23,14 +23,14 @@ namespace DataAccessLayer
         public int Id { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
-        public string Email { get; set; }
         public string Address { get; set; }
-        public string Password { get; set; }
         public string DOB { get; set; }
         public string Institute { get; set; }
         public string Domain { get; set; }
+        public Nullable<int> UserId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CourseInstructorTable> CourseInstructorTable { get; set; }
+        public virtual User User { get; set; }
     }
 }

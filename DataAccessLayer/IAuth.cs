@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
-    public interface IRepository<T, ID>
+    public interface IAuth
     {
-        void Add(T e);
-        void Edit(T e);
-        void Delete(ID id);
-        List<T> Get();
-        T Get(ID id);
+        Token Authenticate(User user);
+        bool IsAuthenticated(string token);
+        bool Logout(string token);
     }
 }

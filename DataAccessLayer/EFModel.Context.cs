@@ -41,5 +41,7 @@ namespace DataAccessLayer
         public virtual DbSet<Student> Student { get; set; }
         public virtual DbSet<StudentTestimonialTable> StudentTestimonialTable { get; set; }
         public virtual DbSet<Testimonial> Testimonial { get; set; }
+        public virtual DbSet<Token> Token { get; set; }
+        public virtual DbSet<User> User { get; set; }
     }
 }
