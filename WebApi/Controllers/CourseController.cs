@@ -14,7 +14,7 @@ namespace WebApi.Controllers
     [EnableCors("*","*","*")]
     public class CourseController : ApiController
     {
-        [CustomAuth]
+        
         [Route("api/Course/All")]
         [HttpGet]
         public List<CourseModel> GetAll()
@@ -22,11 +22,36 @@ namespace WebApi.Controllers
             return CourseService.Get();
         }
 
+        
+        [Route("api/Course/Create")]
+        [HttpGet]
+        public List<CategoryModel> GetCat()
+        {
+            return CourseService.GetCategory();
+        }
+
+        [InstructorAuth]
         [Route("api/Course/Create")]
         [HttpPost]
         public void Add(CourseModel model)
         {
             CourseService.Add(model);
+        }
+
+        [InstructorAuth]
+        [Route("api/Course/delete/{id}")]
+        [HttpPost]
+        public void Delete(int id)
+        {
+            CourseService.delete(id);
+        }
+
+        [InstructorAuth]
+        [Route("api/Course/update/{id}")]
+        [HttpPost]
+        public void Edit(CourseModel model)
+        {
+            CourseService.Edit(model);
         }
 
     }

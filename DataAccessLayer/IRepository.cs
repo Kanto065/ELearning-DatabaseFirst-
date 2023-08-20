@@ -8,7 +8,7 @@ namespace DataAccessLayer
 {
     public interface IRepository<T, ID>
     {
-        void Add(T e);
+        bool Add(T e);
         void Edit(T e);
         void Delete(ID id);
         List<T> Get();

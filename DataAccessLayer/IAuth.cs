@@ -10,6 +10,7 @@ namespace DataAccessLayer
     {
         Token Authenticate(User user);
         bool IsAuthenticated(string token);
+        bool IsRoleAuthenticated(string token);
         bool Logout(string token);
     }
 }

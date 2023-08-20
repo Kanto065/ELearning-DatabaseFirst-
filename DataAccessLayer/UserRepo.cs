@@ -14,10 +14,16 @@ namespace DataAccessLayer
             this.db = db;
         }
 
-        public void Add(User e)
+        public bool Add(User e)
         {
+            var s = db.User.FirstOrDefault(c => c.Email == e.Email);
+            if (s != null)
+            {
+                return false;
+            }
             db.User.Add(e);
             db.SaveChanges();
+            return true;
         }
 
         public void Delete(int id)
@@ -67,6 +73,20 @@ namespace DataAccessLayer
         {
             var rs = db.Token.Any(e=> e.AccessToken.Equals(token)&& e.ExpiredAt==null);
             return rs;
+        }
+
+        public bool IsRoleAuthenticated(string token)
+        {
+            var validToken = db.Token.FirstOrDefault(e => e.AccessToken.Equals(token) && e.ExpiredAt == null);
+            if (validToken != null)
+            {
+                var user = db.User.FirstOrDefault(e => e.Id == validToken.UserId);
+                if(user.RoleId == 2)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public bool Logout(string token)

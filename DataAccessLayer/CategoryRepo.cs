@@ -13,10 +13,11 @@ namespace DataAccessLayer
         {
             this.db = db;
         }
-        public void Add(Category e)
+        public bool Add(Category e)
         {
             db.Category.Add(e);
             db.SaveChanges();
+            return true;
         }
 
         public void Delete(int id)

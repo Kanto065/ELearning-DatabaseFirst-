@@ -24,6 +24,16 @@ namespace DataAccessLayer
             return new CategoryRepo(db);
         }
 
+        public static IRepository<User, int> UserDataAccess()
+        {
+            return new UserRepo(db);
+        }
+
+        public static IRepository<Role, int> RoleDataAccess()
+        {
+            return new RoleRepo(db);
+        }
+
         public static IAuth AuthDataAccess()
         {
             return new UserRepo(db);

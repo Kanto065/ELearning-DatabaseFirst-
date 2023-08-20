@@ -99,8 +99,10 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Auth\CustomAuth.cs" />
+    <Compile Include="Auth\InstructorAuth.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
+    <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

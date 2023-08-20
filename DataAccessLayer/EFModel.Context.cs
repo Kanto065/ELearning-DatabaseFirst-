@@ -25,11 +25,6 @@ namespace DataAccessLayer
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
-        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
-        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
-        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
-        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Course> Course { get; set; }
         public virtual DbSet<CourseInstructorTable> CourseInstructorTable { get; set; }
@@ -38,6 +33,7 @@ namespace DataAccessLayer
         public virtual DbSet<CourseTestimonialTable> CourseTestimonialTable { get; set; }
         public virtual DbSet<Instructor> Instructor { get; set; }
         public virtual DbSet<Module> Module { get; set; }
+        public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<Student> Student { get; set; }
         public virtual DbSet<StudentTestimonialTable> StudentTestimonialTable { get; set; }
         public virtual DbSet<Testimonial> Testimonial { get; set; }

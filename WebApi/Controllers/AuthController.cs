@@ -30,7 +30,6 @@ namespace WebApi.Controllers
             return Request.CreateResponse(HttpStatusCode.BadRequest, "invalid token to log out");
         }
 
-        [EnableCors("*","*","*")]
         [Route("api/login")]
         [HttpPost]
         public HttpResponseMessage Login(UserModel user)

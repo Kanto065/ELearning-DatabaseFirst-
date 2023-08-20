@@ -29,13 +29,28 @@ namespace BusinessLogicLayer
             var data = mapper.Map<User>(user);
             var result = DataAccessFactory.AuthDataAccess().Authenticate(data);
 
-            var token = mapper.Map<TokenModel>(result);
+            var t = new TokenModel()
+            {
+                AccessToken = result.AccessToken,
+                Id = result.Id,
+                UserId = result.UserId,
+                CreatedAt = result.CreatedAt,
+                ExpiredAt = result.ExpiredAt,
+            };
 
-            return token;
+            //var token = mapper.Map<TokenModel>(result);
+
+            return t;
         }
         public static bool IsAuthenticated(string token)
         {
             var rs = DataAccessFactory.AuthDataAccess().IsAuthenticated(token);
+            return rs;
+        }
+
+        public static bool IsRoleAuthenticated(string token)
+        {
+            var rs = DataAccessFactory.AuthDataAccess().IsRoleAuthenticated(token);
             return rs;
         }
 
